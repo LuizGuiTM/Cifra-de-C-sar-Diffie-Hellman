@@ -20,14 +20,13 @@ def verificaPrimo(numero):
         R = numero % i
         if R == 0:
             return False
-            break
         i += 1
     else:
         return True
  
 # ===== Configuração Diffie-Hellman =====
 N = 1000003  # primo
-G = 154858   # base
+G = 154858  # base
 y = random.randint(100000, 999999)  # expoente do servidor
 primo = verificaPrimo(N)
 if primo: 

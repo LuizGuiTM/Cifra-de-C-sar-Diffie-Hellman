@@ -66,7 +66,6 @@ def verificaPrimo(numero):
         R = numero % i
         if R == 0:
             return False
-            break
         i += 1
     else:
         return True
