@@ -2,7 +2,7 @@ from socket import *
 import random
  
 def main():
-    N = 999983 #primo
+    N = 1000003 #primo
     G = 154858 #nao necessariamente primo, mas menor que N
  
     x = random.randint(100000, 999999) #x aleatorio
@@ -29,7 +29,7 @@ def main():
     
         sentence = input("Digite a sentença: ")
     
-        sentenceCriptograda = cesar(sentence, K)
+        sentenceCriptograda = caesar(sentence, K)
     
         clientSocket.send(bytes(sentenceCriptograda, "utf-8"))
     
@@ -39,7 +39,7 @@ def main():
     
         print ("Sentença criptograda recebida do servidor: ", modifiedSentence)
     
-        sentenceDescriptograda = cesar(modifiedSentence, -K)
+        sentenceDescriptograda = caesar(modifiedSentence, -K)
     
         print ("Sentença descriptograda recebida do servidor: ", sentenceDescriptograda)
     
@@ -47,17 +47,16 @@ def main():
     else:
          print ("Numero não é primo ", N)
  
-def cesar(texto, k):
-    out = []
-    for ch in texto:
-        if 'a' <= ch <= 'z':
-            out.append(chr((ord(ch) - ord('a') + k) % 26 + ord('a')))
-        elif 'A' <= ch <= 'Z':
-            out.append(chr((ord(ch) - ord('A') + k) % 26 + ord('A')))
+def caesar(texto, k):
+    resultado = ""
+    for c in texto:
+        codigo = ord(c)
+        if 32 <= codigo <= 126: 
+            novo_codigo = 32 + ((codigo - 32 + k) % 95)
+            resultado += chr(novo_codigo)
         else:
-            out.append(ch)
-    return ''.join(out)
-
+            resultado += c  
+    return resultado
 
  #primo fast
 def verificaPrimo(numero):

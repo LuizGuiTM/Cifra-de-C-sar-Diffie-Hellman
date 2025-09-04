@@ -3,16 +3,15 @@ import random
  
 # ===== Função Cifra de César =====
 def caesar(texto, k):
-    k = k % 26  # garante que caiba no alfabeto
-    out = []
-    for ch in texto:
-        if 'a' <= ch <= 'z':
-            out.append(chr((ord(ch) - ord('a') + k) % 26 + ord('a')))
-        elif 'A' <= ch <= 'Z':
-            out.append(chr((ord(ch) - ord('A') + k) % 26 + ord('A')))
+    resultado = ""
+    for c in texto:
+        codigo = ord(c)
+        if 32 <= codigo <= 126: 
+            novo_codigo = 32 + ((codigo - 32 + k) % 95)
+            resultado += chr(novo_codigo)
         else:
-            out.append(ch)
-    return ''.join(out)
+            resultado += c  
+    return resultado
 # ===== primo fast =====
 def verificaPrimo(numero):
     i = 2
@@ -23,9 +22,8 @@ def verificaPrimo(numero):
         i += 1
     else:
         return True
- 
 # ===== Configuração Diffie-Hellman =====
-N = 1000003  # primo
+N = 9  # primo
 G = 154858  # base
 y = random.randint(100000, 999999)  # expoente do servidor
 primo = verificaPrimo(N)
